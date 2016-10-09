@@ -14,8 +14,8 @@ class StdOutListener(StreamListener):
         data = json.loads(data_str)
         if len(data['entities']['urls']) != 0:
             newdata = {'created_at' : data['created_at'], 'text' : data['text'],
-                'hashtags' : [hashtag['text'] for hashtag in data['entities']['hashtags'] ],
-                'urls' : [url['expanded_url'] for url in data['entities']['urls'] if url['url'] != '' ] }
+                'hashtags' : [ hashtag['text'] for hashtag in data['entities']['hashtags'] ],
+                'urls' : [ url['expanded_url'] for url in data['entities']['urls'] if url['url'] != '' ] }
             if len(newdata['urls']) != 0:
                 print json.dumps(newdata)
         return True
