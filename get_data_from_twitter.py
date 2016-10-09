@@ -24,6 +24,4 @@ auth = OAuthHandler(config.consumer_key, config.consumer_secret)
 auth.set_access_token(config.access_token, config.access_token_secret)
 stream = Stream(auth, l)
 
-#stream.filter(track=['#Trump2016', '#Hillary2016'])
-stream.filter(track=['#Trump2016'])
-
+stream.filter(track=['#Trump2016', '#Hillary2016'])
