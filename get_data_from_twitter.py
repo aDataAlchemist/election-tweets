@@ -13,8 +13,10 @@ class StdOutListener(StreamListener):
     def on_data(self, data_str):
         data = json.loads(data_str)
         if len(data['entities']['urls']) != 0:
-            newdata = {'created_at' : data['created_at'], 'text' : data['text'], 'urls' : [url['expanded_url'] for url in data['entities']['urls'] if url['url'] != '' ] }
-            print json.dumps(newdata)
+            newdata = {'created_at' : data['created_at'], 'text' : data['text'],
+                'urls' : [url['expanded_url'] for url in data['entities']['urls'] if url['url'] != '' ] }
+            if len(newdata['urls']) != 0:
+                print json.dumps(newdata)
         return True
     def on_error(self, status):
         print status
