@@ -12,10 +12,15 @@ import sys
 class StdOutListener(StreamListener):
     def on_data(self, data_str):
         data = json.loads(data_str)
-        if len(data['entities']['urls']) != 0:
-            newdata = {'created_at' : data['created_at'], 'text' : data['text'],
-                'hashtags' : [ hashtag['text'] for hashtag in data['entities']['hashtags'] ],
-                'urls' : [ url['expanded_url'] for url in data['entities']['urls'] if url['url'] != '' ] }
+        if 'entities' in data and 'urls' in data['entities'] and len(data['entities']['urls']) != 0:
+            newdata = {}
+            if 'created_at' in data:
+                newdata['created_at'] = data['created_at']
+            if 'text' in data:
+                newdata['text'] = data['text']
+            if 'hashtags' in data['entities']:
+                newdata['hashtags'] = [ hashtag['text'] for hashtag in data['entities']['hashtags'] ],
+            newdata['urls'] = [ url['expanded_url'] for url in data['entities']['urls'] if 'url' in url and 'expanded_url' in url and url['url'] != '' ]
             if len(newdata['urls']) != 0:
                 print json.dumps(newdata)
         return True
