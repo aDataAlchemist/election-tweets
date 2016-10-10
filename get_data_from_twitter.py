@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
-import numpy
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 import json
 import config
+import sys
 
 #Much of this code comes from http://adilmoujahid.com/posts/2014/07/twitter-analytics/
 
@@ -27,4 +27,5 @@ auth = OAuthHandler(config.consumer_key, config.consumer_secret)
 auth.set_access_token(config.access_token, config.access_token_secret)
 stream = Stream(auth, l)
 
-stream.filter(track=['#Trump2016', '#Hillary2016'])
+print "Tracking tweets with the following terms: " + str(sys.argv[1:])
+stream.filter(track=sys.argv[1:])
