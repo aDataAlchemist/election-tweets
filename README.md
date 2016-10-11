@@ -13,5 +13,5 @@ This will print the data to standard out, so it may make sense to pipe the outpu
 Run the following script to get the top hashtags from the previous data set:
 
 ```
-python get_top_hashtags.py [input file]
+python get_top_hashtags.py [input file] [optional number of hashtags to return]
 ```
