@@ -19,7 +19,7 @@ class StdOutListener(StreamListener):
             if 'text' in data:
                 newdata['text'] = data['text']
             if 'hashtags' in data['entities']:
-                newdata['hashtags'] = [ hashtag['text'] for hashtag in data['entities']['hashtags'] ],
+                newdata['hashtags'] = [ hashtag['text'] for hashtag in data['entities']['hashtags'] if 'text' in hashtag ]
             newdata['urls'] = [ url['expanded_url'] for url in data['entities']['urls'] if 'url' in url and 'expanded_url' in url and url['url'] != '' ]
             if len(newdata['urls']) != 0:
                 print json.dumps(newdata)
